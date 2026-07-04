@@ -13,3 +13,40 @@ Backend developers need to know how to use the command line because it allows th
 An absolute path is the complete path to a file or folder starting from the root directory. It always points to the same location regardless of the current directory. Example:/home/ruth/t4g_assignment/class01/notes.txt A relative path is a path that is based on the current working directory. It depends on where you are currently located. Example:class01/notes.txt
 I would explain that File Explorer and Finder are useful for basic file management, but the command line is faster and more powerful for many tasks. It allows you to automate repetitive work, manage files efficiently, use development tools, access remote servers, and perform tasks that are difficult or impossible with a graphical interface. Since many backend development tools rely on the command line, learning it is an important skill.
 The ~ symbol represents the user’s home directory. It is a shortcut that allows you to quickly navigate to your home folder. The $ symbol is the shell prompt for a regular user. It indicates that the terminal is ready to accept a command. On Linux systems, the # symbol is usually used for the root (administrator) user instead.
+               THE JOURNEY OF A WEB REQUEST (ROUND TRIP)
+========================================================================================
+
+ [ CLIENT ] --------------------( 1. Looks up IP )-------------------> [ DNS ]
+ (Browser/User) <---------------( 2. Returns IP )--------------------- (Domain Name System)
+     |
+     | (3. Sends HTTP Request to IP)
+     v
+ [ FIREWALL ] --------------------------------------------------------> (Monitors & blocks unauthorized traffic)
+     |
+     | (4. Clean traffic passes through)
+     v
+ [ LOAD BALANCER ] ---------------------------------------------------> (Distributes incoming requests across servers)
+     |
+     | (5. Routes to available server)
+     v
+ [ WEB SERVER ] ------------------------------------------------------> (Handles HTTP requests, serves static files)
+     |
+     | (6. Forwards dynamic request)
+     v
+ [ APPLICATION SERVER ] ----------------------------------------------> (Runs business logic and processes data)
+     |
+     | (7. Queries data)
+     v
+ [ DATABASE ] <======================================================== (Stores and manages application data)
+                      
+========================================================================================
+                      THE RETURN JOURNEY (SENDING THE RESPONSE)
+========================================================================================
+
+ [ DATABASE ] ------------------( 8. Sends data back )----------------> [ APPLICATION SERVER ]
+                                                                                |
+ [ WEB SERVER ] <---------------( 9. Sends built webpage/JSON )--------+
+     |
+     | (10. Passes response back)
+     v
+ [ LOAD BALANCER ] ---> [ FIREWALL ] ---> [ CLIENT ] (11. Browser renders the page for the user!)
